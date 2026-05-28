@@ -1,0 +1,699 @@
+```html id="h5x9vc"
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ========================================= -->
+    <!-- QUESTION 1: HTML5 BASE TEMPLATE -->
+    <!-- ========================================= -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Local Community Event Portal</title>
+
+    <!-- ========================================= -->
+    <!-- INTERNAL CSS -->
+    <!-- ========================================= -->
+
+    <style>
+
+        /* ========================================= */
+        /* LAVENDER & BEIGE THEME */
+        /* ========================================= */
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #F5F0E6;
+            color: #4B3F72;
+        }
+
+        /* ========================================= */
+        /* NAVIGATION */
+        /* ========================================= */
+
+        nav {
+            background-color: #C8A2C8;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: beige;
+        }
+
+        /* ========================================= */
+        /* QUESTION 3: WELCOME BANNER */
+        /* ========================================= */
+
+        #welcomeBanner {
+
+            background: linear-gradient(
+                to right,
+                #C8A2C8,
+                #E6D5B8
+            );
+
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .highlight {
+            background-color: beige;
+            color: #4B3F72;
+
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        /* ========================================= */
+        /* QUESTION 4: IMAGE GALLERY */
+        /* ========================================= */
+
+        .gallery-img {
+
+            width: 200px;
+            height: 120px;
+
+            border: 4px solid #C8A2C8;
+            border-radius: 12px;
+
+            transition: 0.3s;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
+
+        table {
+            margin-top: 20px;
+        }
+
+        td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* ========================================= */
+        /* QUESTION 5: FORM DESIGN */
+        /* ========================================= */
+
+        form {
+
+            background-color: white;
+            padding: 25px;
+            width: 450px;
+
+            border-radius: 15px;
+
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+        }
+
+        input,
+        textarea,
+        select {
+
+            width: 100%;
+            padding: 10px;
+
+            margin-top: 6px;
+            margin-bottom: 15px;
+
+            border: 2px solid #C8A2C8;
+            border-radius: 8px;
+
+            background-color: #FFFDF8;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+
+            outline: none;
+
+            border-color: #9F7AEA;
+
+            box-shadow: 0px 0px 6px #C8A2C8;
+        }
+
+        button {
+
+            padding: 12px 18px;
+
+            background-color: #C8A2C8;
+            color: white;
+
+            border: none;
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+
+            background-color: #9F7AEA;
+
+            transform: scale(1.05);
+        }
+
+        /* ========================================= */
+        /* VIDEO */
+        /* ========================================= */
+
+        video {
+
+            width: 450px;
+
+            border: 4px solid #C8A2C8;
+
+            border-radius: 12px;
+        }
+
+        /* ========================================= */
+        /* SECTIONS */
+        /* ========================================= */
+
+        section {
+
+            background-color: #FFFDF8;
+
+            padding: 20px;
+
+            border-radius: 15px;
+
+            margin-top: 20px;
+
+            box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+        }
+
+        /* ========================================= */
+        /* FOOTER */
+        /* ========================================= */
+
+        footer {
+
+            margin-top: 30px;
+
+            padding: 15px;
+
+            background-color: #C8A2C8;
+
+            color: white;
+
+            text-align: center;
+
+            border-radius: 10px;
+        }
+
+    </style>
+
+    <!-- ========================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================================= -->
+
+    <script>
+
+        // =========================================
+        // QUESTION 6: EVENT HANDLING
+        // =========================================
+
+        function validatePhone() {
+
+            let phone =
+                document.getElementById("phone").value;
+
+            if(phone.length != 10) {
+
+                alert("Phone Number Must Be 10 Digits");
+            }
+        }
+
+        function showFee() {
+
+            let fee =
+                document.getElementById("eventType").value;
+
+            document.getElementById("fee")
+                .innerHTML =
+                "Selected Event Fee: ₹" + fee;
+        }
+
+        function confirmSubmit() {
+
+            alert("Registration Successful!");
+        }
+
+        function enlargeImage(img) {
+
+            img.style.width = "400px";
+            img.style.height = "250px";
+        }
+
+        function countChars() {
+
+            let text =
+                document.getElementById("feedback").value;
+
+            document.getElementById("charCount")
+                .innerHTML =
+                text.length + " Characters";
+        }
+
+        // =========================================
+        // QUESTION 7: VIDEO EVENT
+        // =========================================
+
+        function videoReady() {
+
+            document.getElementById("videoMsg")
+                .innerHTML =
+                "Video Ready To Play";
+        }
+
+        // =========================================
+        // QUESTION 8: LOCAL STORAGE
+        // =========================================
+
+        function savePreference() {
+
+            let selected =
+                document.getElementById("eventType").value;
+
+            localStorage.setItem(
+                "preferredEvent",
+                selected
+            );
+        }
+
+        function loadPreference() {
+
+            let saved =
+                localStorage.getItem("preferredEvent");
+
+            if(saved) {
+
+                document.getElementById("eventType")
+                    .value = saved;
+            }
+        }
+
+        function clearPreferences() {
+
+            localStorage.clear();
+            sessionStorage.clear();
+
+            alert("Preferences Cleared");
+        }
+
+        // =========================================
+        // QUESTION 9: GEOLOCATION
+        // =========================================
+
+        function findLocation() {
+
+            navigator.geolocation.getCurrentPosition(
+
+                showPosition,
+
+                showError,
+
+                {
+                    enableHighAccuracy: true,
+                    timeout: 5000
+                }
+            );
+        }
+
+        function showPosition(position) {
+
+            document.getElementById("location")
+                .innerHTML =
+
+                "Latitude: " +
+                position.coords.latitude +
+
+                "<br>Longitude: " +
+                position.coords.longitude;
+        }
+
+        function showError(error) {
+
+            switch(error.code) {
+
+                case error.PERMISSION_DENIED:
+                    alert("Permission Denied");
+                    break;
+
+                case error.TIMEOUT:
+                    alert("Request Timeout");
+                    break;
+
+                default:
+                    alert("Unknown Error");
+            }
+        }
+
+        // =========================================
+        // QUESTION 7: BEFORE UNLOAD
+        // =========================================
+
+        window.onbeforeunload = function() {
+
+            return "Form Is Not Submitted!";
+        }
+
+        // =========================================
+        // QUESTION 10: DEBUGGING
+        // =========================================
+
+        console.log("Community Portal Loaded");
+
+        window.onload = function() {
+
+            loadPreference();
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <!-- ========================================= -->
+    <!-- QUESTION 2: NAVIGATION -->
+    <!-- ========================================= -->
+
+    <nav>
+
+        <a href="#home">Home</a>
+
+        <a href="#events">Events</a>
+
+        <a href="#contact">Contact</a>
+
+        <a href="help.html" target="_blank">
+            Help
+        </a>
+
+    </nav>
+
+    <hr>
+
+    <!-- ========================================= -->
+    <!-- QUESTION 3: WELCOME MESSAGE -->
+    <!-- ========================================= -->
+
+    <div id="welcomeBanner">
+
+        <h1>
+            Welcome To Local Community Portal
+        </h1>
+
+        <p class="highlight">
+            Enjoy Amazing Community Events
+        </p>
+
+        <span style="color:red; font-weight:bold;">
+
+            Special Offer:
+            Free Registration Today!
+
+        </span>
+
+    </div>
+
+    <hr>
+
+    <!-- ========================================= -->
+    <!-- QUESTION 4: IMAGE GALLERY -->
+    <!-- ========================================= -->
+
+    <section id="events">
+
+        <h2>Community Event Gallery</h2>
+
+        <table>
+
+            <tr>
+
+                <td>
+
+                    <img src="https://th.bing.com/th/id/OIP.fPNm5KQFzmOtLOjpJ-35VgHaEK?w=280&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/200"
+                        class="gallery-img"
+                        alt="Music Event"
+                        title="Music Event"
+
+                        ondblclick="enlargeImage(this)">
+
+                    <p>Music Festival</p>
+
+                </td>
+
+                <td>
+
+                    <img src="https://th.bing.com/th/id/OIP.Dl6ZT4PsNdcNMupKUu2fVwHaHa?w=168&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/200"
+                        class="gallery-img"
+                        alt="Food Event"
+                        title="Food Event"
+
+                        ondblclick="enlargeImage(this)">
+
+                    <p>Food Carnival</p>
+
+                </td>
+
+                <td>
+
+                    <img src="https://th.bing.com/th/id/OIP.EPeNlNH7O8S29rzQkazuBgHaEK?w=300&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/200"
+                        class="gallery-img"
+                        alt="Dance Event"
+                        title="Dance Event"
+
+                        ondblclick="enlargeImage(this)">
+
+                    <p>Dance Show</p>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <img src="https://th.bing.com/th/id/OIP.y6GvNC_y48SyGqSIFLmDLwHaEJ?w=318&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/200"
+                        class="gallery-img"
+                        alt="Workshop"
+                        title="Workshop"
+
+                        ondblclick="enlargeImage(this)">
+
+                    <p>Workshop</p>
+
+                </td>
+
+                <td>
+
+                    <img src="https://th.bing.com/th/id/OIP.ZVCZxrd_8UeLGGCYY-TvKwHaHa?w=169&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/200"
+                        class="gallery-img"
+                        alt="Sports Event"
+                        title="Sports Event"
+
+                        ondblclick="enlargeImage(this)">
+
+                    <p>Sports Event</p>
+
+                </td>
+
+                <td>
+
+                    <img src="https://th.bing.com/th/id/OIP.NXTyerAzlvUSCyky2iqfBAHaE7?w=264&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/200"
+                        class="gallery-img"
+                        alt="Art Event"
+                        title="Art Event"
+
+                        ondblclick="enlargeImage(this)">
+
+                    <p>Art Exhibition</p>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+    <hr>
+
+    <!-- ========================================= -->
+    <!-- QUESTION 5: REGISTRATION FORM -->
+    <!-- ========================================= -->
+
+    <section id="contact">
+
+        <h2>Event Registration Form</h2>
+
+        <form onsubmit="confirmSubmit()">
+
+            Name:
+
+            <input type="text"
+                placeholder="Enter Your Name"
+                required
+                autofocus>
+
+            Email:
+
+            <input type="email"
+                placeholder="Enter Your Email"
+                required>
+
+            Phone Number:
+
+            <input type="text"
+                id="phone"
+                onblur="validatePhone()">
+
+            Event Date:
+
+            <input type="date">
+
+            Event Type:
+
+            <select id="eventType"
+
+                onchange="showFee();
+                savePreference()">
+
+                <option value="100">
+
+                    Music Event
+
+                </option>
+
+                <option value="200">
+
+                    Dance Event
+
+                </option>
+
+                <option value="300">
+
+                    Sports Event
+
+                </option>
+
+            </select>
+
+            <p id="fee"></p>
+
+            Message:
+
+            <textarea rows="4"></textarea>
+
+            Feedback:
+
+            <textarea id="feedback"
+
+                onkeyup="countChars()">
+
+            </textarea>
+
+            <p id="charCount"></p>
+
+            <button type="submit">
+
+                Register
+
+            </button>
+
+            <button type="button"
+
+                onclick="clearPreferences()">
+
+                Clear Preferences
+
+            </button>
+
+            <output>
+
+                Registration Successful
+
+            </output>
+
+        </form>
+
+    </section>
+
+    <hr>
+
+    <!-- ========================================= -->
+    <!-- QUESTION 7: VIDEO -->
+    <!-- ========================================= -->
+
+    <h2>Event Promo Video</h2>
+
+    <video controls oncanplay="videoReady()">
+
+        <source src="sample.mp4"
+            type="video/mp4">
+
+    </video>
+
+    <p id="videoMsg"></p>
+
+    <hr>
+
+    <!-- ========================================= -->
+    <!-- QUESTION 9: GEOLOCATION -->
+    <!-- ========================================= -->
+
+    <h2>Find Nearby Events</h2>
+
+    <button onclick="findLocation()">
+
+        Find Nearby Events
+
+    </button>
+
+    <p id="location"></p>
+
+    <hr>
+
+    <!-- ========================================= -->
+    <!-- FOOTER -->
+    <!-- ========================================= -->
+
+    <footer>
+
+        <p>
+
+            © 2026 Local Community Event Portal
+
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
+```
